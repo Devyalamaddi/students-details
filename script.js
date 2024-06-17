@@ -37,7 +37,19 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
 
             // Display the result
             const resultContainer = document.getElementById('result-container');
-            resultContainer.innerHTML = result ? JSON.stringify(result, null, 2) : 'No student found';
+            if (result) {
+                resultContainer.innerHTML = `
+                    <div class="student-details">
+                        <p><strong>Name:</strong> ${result.Name}</p>
+                        <p><strong>Roll Number:</strong> ${result.RollNumber}</p>
+                        <p><strong>UID:</strong> ${result.UID}</p>
+                        <p><strong>Age:</strong> ${result.Age}</p>
+                        <p><strong>Course:</strong> ${result.Course}</p>
+                    </div>
+                `;
+            } else {
+                resultContainer.innerHTML = '<p class="error-message">No student found</p>';
+            }
         })
         .catch(error => {
             console.error('Error loading the Excel file:', error);
